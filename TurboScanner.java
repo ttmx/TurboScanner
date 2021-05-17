@@ -17,7 +17,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-class TurboScanner{
+class TurboScanner implements AutoCloseable{
 	BufferedReader br;
 	public TurboScanner(InputStream in){
 		br = new BufferedReader(new InputStreamReader(in));
@@ -39,6 +39,11 @@ class TurboScanner{
 	public String nextLine() throws IOException{
 		return br.readLine();
 	}
+
+    public byte nextByte() throws IOException {
+        return (byte) br.read(); // UB when next character is > 255
+    }
+
 	public void close() throws IOException{
 		br.close();
 	}
